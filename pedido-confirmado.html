@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pedido confirmado | IWNZ Tech</title>
+
+  <!-- Fontes utilizadas no restante do site. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Reutiliza o CSS principal da loja. -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Estilos exclusivos da confirmação. -->
+  <style>
+    .confirmation-page {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .confirmation-card {
+      width: min(620px, 100%);
+      padding: clamp(28px, 6vw, 55px);
+      background: #111720;
+      border: 1px solid #293341;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 24px 70px #0007;
+    }
+
+    .success-mark {
+      width: 76px;
+      height: 76px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: #b8f34a;
+      color: #10140b;
+      font-size: 38px;
+      font-weight: 700;
+    }
+
+    .confirmation-card h1 {
+      font: 700 clamp(32px, 6vw, 48px)/1.1 "Space Grotesk", sans-serif;
+      letter-spacing: -0.05em;
+      margin: 12px 0;
+    }
+
+    .confirmation-card h1 span {
+      color: #b8f34a;
+    }
+
+    .confirmation-card > p {
+      color: #9aa7b7;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .order-details {
+      margin: 28px 0;
+      padding: 18px;
+      background: #0b0e13;
+      border: 1px solid #293341;
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .order-details div {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 8px 0;
+      font-size: 12px;
+      border-bottom: 1px solid #293341;
+    }
+
+    .order-details div:last-child {
+      border: 0;
+    }
+
+    .order-details span {
+      color: #9aa7b7;
+    }
+
+    .order-details strong {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .demo-notice {
+      font-size: 10px !important;
+      color: #b8f34a !important;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="confirmation-page">
+    <section class="confirmation-card" aria-labelledby="confirmationTitle">
+
+      <!-- Logotipo com link para retornar à loja. -->
+      <a class="brand" href="index.html"
+        style="justify-content:center; margin-bottom:34px">
+        <span class="brand-mark">I</span>
+        <span>IWNZ <b>TECH</b><small>POWER YOUR NEXT</small></span>
+      </a>
+
+      <div class="success-mark" aria-hidden="true">✓</div>
+
+      <p class="eyebrow">CHECKOUT DEMONSTRATIVO</p>
+
+      <h1 id="confirmationTitle">
+        Pedido <span>confirmado!</span>
+      </h1>
+
+      <p>
+        Obrigado por escolher a IWNZ Tech. A jornada de compra foi
+        concluída com sucesso neste protótipo acadêmico.
+      </p>
+
+      <!-- O JavaScript preencherá os dados do pedido aqui. -->
+      <div class="order-details" id="orderDetails" aria-live="polite">
+        <div>
+          <span>Número do pedido</span>
+          <strong>Carregando…</strong>
+        </div>
+      </div>
+
+      <p class="demo-notice">
+        Atenção: nenhuma cobrança foi feita e nenhum pedido real foi enviado.
+      </p>
+
+      <a class="button button-primary" href="index.html">
+        Voltar à loja <span>↗</span>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    // Recupera o resumo do pedido salvo na página principal.
+    const order = (() => {
+      try {
+        return JSON.parse(sessionStorage.getItem("iwnz_last_order"));
+      } catch (error) {
+        return null;
+      }
+    })();
+
+    // Seleciona a área que mostrará os detalhes.
+    const details = document.querySelector("#orderDetails");
+
+    // Se existe um pedido, apresenta os dados recebidos.
+    if (order) {
+      details.innerHTML = `
+        <div>
+          <span>Número do pedido</span>
+          <strong>${order.orderNumber}</strong>
+        </div>
+
+        <div>
+          <span>Cliente</span>
+          <strong>${order.name}</strong>
+        </div>
+
+        <div>
+          <span>Itens</span>
+          <strong>${order.items}</strong>
+        </div>
+
+        <div>
+          <span>Total simulado</span>
+          <strong>
+            ${new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL"
+            }).format(order.total)}
+          </strong>
+        </div>
+
+        <div>
+          <span>Data</span>
+          <strong>${order.date}</strong>
+        </div>
+      `;
+    } else {
+      // Se a página for aberta diretamente, informa que não há pedido.
+      details.innerHTML = `
+        <div>
+          <span>Status</span>
+          <strong>Nenhum pedido nesta sessão</strong>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
