@@ -9,6 +9,7 @@ Trabalho do Marcelo Boer
 - **Loja (`Loja/`)**: vitrine de produtos de tecnologia (hardware, periféricos, monitores e acessórios) com busca, filtros por categoria, ordenação, carrinho, cadastro e login de clientes, checkout simulado e página de pedido confirmado.
 - **Painel da loja (`Dashboard/`)**: área do administrador ("Minha Loja") para cadastrar e listar produtos e clientes, ver os pedidos feitos na loja e acompanhar vendas da semana, meta do mês e ticket médio.
 - **Dados compartilhados (`Compartilhado/dados.js`)**: catálogo inicial e funções usadas pelas duas partes. O que é cadastrado no painel aparece na loja, e as contas e pedidos feitos na loja aparecem no painel.
+- **Ícone do site (`Compartilhado/favicon.svg`)**: o "I" da marca IWNZ Tech, com o mesmo degradê roxo e azul do cabeçalho, usado na aba do navegador da loja, da página de pedido confirmado e do painel.
 
 Também foram trabalhados pontos de experiência e acessibilidade: alto contraste, texto maior, redução de animações, navegação por teclado, e textos de privacidade com as opções de baixar e excluir os próprios dados (LGPD).
 
