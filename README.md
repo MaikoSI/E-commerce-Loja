@@ -49,9 +49,24 @@ Lista de pedidos feitos na loja:
 
 > Os nomes, e-mails e pedidos que aparecem nos prints são fictícios, criados só para a demonstração.
 
-## Diagrama do banco de dados
+## Banco de dados
 
-O projeto não tem um servidor de banco de dados: tudo fica no `localStorage` do navegador, em listas no formato JSON. O diagrama abaixo mostra como esses dados se organizam e se relacionam, como seriam as tabelas de um banco.
+O projeto não tem um servidor de banco de dados: tudo fica no `localStorage` do navegador, em listas no formato JSON. Os diagramas abaixo mostram como esses dados se organizam e se relacionam, como seriam num banco de dados.
+
+### MER (Modelo Entidade-Relacionamento)
+
+![MER da IWNZ Tech: entidades Cliente, Conta da loja, Pedido e Produto, ligadas pelos relacionamentos Possui, Faz e Contém](docs/mer.svg)
+
+Como ler o MER:
+
+- **Cliente FAZ Pedido**: cada cliente faz de 0 a muitos pedidos (0,n), e cada pedido é de exatamente 1 cliente (1,1).
+- **Pedido CONTÉM Produto**: cada pedido tem de 1 a muitos produtos (1,n), e cada produto pode estar em 0 ou muitos pedidos (0,n). É um relacionamento muitos-para-muitos, com os atributos `quantidade` e `precoNaCompra`, que guarda o preço do produto no momento da compra.
+- **Cliente POSSUI Conta da loja**: o cliente pode ter 0 ou 1 conta (0,1). Quem cria conta na loja vira cliente, mas o administrador também pode cadastrar clientes no painel sem conta. Cada conta pertence a exatamente 1 cliente (1,1).
+- A lista de e-mails da newsletter não aparece no MER, porque é um cadastro solto, sem ligação com as outras entidades.
+
+### Modelo lógico
+
+Este diagrama mostra os mesmos dados no formato de tabelas, com chaves primárias (PK) e estrangeiras (FK). O relacionamento muitos-para-muitos CONTÉM vira a tabela `ITEM_PEDIDO`.
 
 ```mermaid
 erDiagram
