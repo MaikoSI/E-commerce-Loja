@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="IWNZ Tech: loja virtual e painel administrativo de demonstração (trabalho da faculdade).">
+  <title>IWNZ Tech | Loja e Painel</title>
+  <link rel="icon" href="Compartilhado/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Página de entrada do projeto publicado: leva para a Loja e para o Painel -->
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: #10141f;
+      --line: #242c42;
+      --text: #f4f6fc;
+      --muted: #94a0b8;
+      --accent: #8b5cf6;
+      --accent-2: #3b82f6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      background: radial-gradient(circle at 20% 0%, #8b5cf633, transparent 45%), var(--bg);
+      color: var(--text);
+      font: 16px/1.6 "DM Sans", Arial, sans-serif;
+    }
+    main { width: min(880px, 100%); }
+    .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; font: 700 20px "Space Grotesk", Arial, sans-serif; }
+    .brand img { width: 44px; height: 44px; }
+    .brand small { display: block; color: var(--muted); font: 500 11px "DM Sans", Arial, sans-serif; letter-spacing: .25em; }
+    h1 { margin: 0 0 10px; font: 700 clamp(30px, 6vw, 46px)/1.1 "Space Grotesk", Arial, sans-serif; letter-spacing: -0.03em; }
+    h1 span { color: var(--accent); }
+    .intro { margin: 0 0 32px; color: var(--muted); max-width: 60ch; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    .card {
+      display: flex; flex-direction: column; gap: 10px;
+      padding: 26px; border: 1px solid var(--line); border-radius: 18px;
+      background: var(--panel); color: inherit; text-decoration: none;
+      transition: border-color .2s, transform .2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .card:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+    .card h2 { margin: 0; font: 700 22px "Space Grotesk", Arial, sans-serif; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .card .go {
+      margin-top: auto; align-self: flex-start; padding: 10px 18px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; font-weight: 700; font-size: 15px;
+    }
+    .login { margin-top: 4px; padding: 10px 12px; border-radius: 10px; background: #0b0e16; border: 1px dashed var(--line); font-size: 14px; color: var(--muted); }
+    .login b { color: var(--text); font-weight: 500; }
+    .note { margin-top: 28px; font-size: 13px; color: var(--muted); }
+    @media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">
+      <img src="Compartilhado/favicon.svg" alt="">
+      <span>IWNZ TECH<small>POWER YOUR NEXT</small></span>
+    </div>
+
+    <h1>Loja virtual e <span>painel da loja.</span></h1>
+    <p class="intro">Trabalho da faculdade: uma loja de tecnologia de demonstração e o painel do administrador. Escolha o que quer abrir.</p>
+
+    <div class="cards">
+      <a class="card" href="Loja/">
+        <h2>Loja</h2>
+        <p>A vitrine para o cliente: produtos, busca, carrinho, cadastro e checkout simulado.</p>
+        <span class="go">Abrir a loja ↗</span>
+      </a>
+
+      <a class="card" href="Dashboard/">
+        <h2>Dashboard</h2>
+        <p>O painel do administrador: vendas, metas, cadastro e lista de produtos, clientes e pedidos.</p>
+        <p class="login">Login de demonstração (fictício):<br><b>admin@admin.com</b> · senha <b>adminadmin</b></p>
+        <span class="go">Abrir o dashboard ↗</span>
+      </a>
+    </div>
+
+    <p class="note">Projeto acadêmico: nenhuma compra é real. Os dados ficam salvos só no navegador de quem acessa, e a loja e o painel compartilham esses dados quando abertos no mesmo navegador.</p>
+  </main>
+</body>
+</html>

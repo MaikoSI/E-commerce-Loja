@@ -11,6 +11,7 @@ Two apps that share data through browser storage:
 - `Loja/` — customer storefront (`index.html` + `pedido-confirmado.html`, shared `style.css`, `script.js`).
 - `Dashboard/` — admin panel ("Minha Loja") for registering/listing products and clients and viewing store orders.
 - `Compartilhado/dados.js` — storage keys, initial catalog and helpers shared by both apps.
+- `index.html` (repo root) — landing page linking to `Loja/` and `Dashboard/` (shows the demo login). The site is published with GitHub Pages from `main` / root at `https://maikosi.github.io/E-commerce-Loja/` (`.nojekyll` disables Jekyll). Both apps must stay under that one origin to share localStorage, and every internal link/asset path must stay relative (the site lives under the `/E-commerce-Loja/` subpath).
 - `Compartilhado/favicon.svg` — tab icon (the "I" brand mark, purple→blue gradient matching `--accent`/`--accent-2`), linked via `<link rel="icon" href="../Compartilhado/favicon.svg">` in all three pages; any new page should link it too.
 - `docs/prints/` — screenshots (JPEG) embedded in `README.md`. `docs/mer.svg` is the conceptual MER (Chen notation, hand-placed SVG) and the README also holds a Mermaid logical model of the localStorage data; update them when the UI or the data shape changes.
 

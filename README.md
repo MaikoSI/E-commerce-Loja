@@ -4,6 +4,18 @@ Trabalho do Marcelo Boer
 
 **IWNZ Tech** é uma loja virtual de demonstração feita como **trabalho da faculdade**, na disciplina de Design de Interface. É um projeto acadêmico: nenhuma compra, cobrança ou entrega é real, e os produtos, preços e avaliações são ilustrativos.
 
+## Acessar online
+
+| | Link |
+|---|---|
+| Página inicial (leva para os dois) | https://maikosi.github.io/E-commerce-Loja/ |
+| **Loja** | https://maikosi.github.io/E-commerce-Loja/Loja/ |
+| **Dashboard** (painel do administrador) | https://maikosi.github.io/E-commerce-Loja/Dashboard/ |
+
+Login de demonstração do Dashboard (fictício): `admin@admin.com`, senha `adminadmin`.
+
+Os dados ficam salvos no navegador de quem acessa. Para ver uma compra feita na Loja aparecer no Dashboard, abra os dois no mesmo navegador.
+
 ## O que tem no projeto
 
 - **Loja (`Loja/`)**: vitrine de produtos de tecnologia (hardware, periféricos, monitores e acessórios) com busca, filtros por categoria, ordenação, carrinho, cadastro e login de clientes, checkout simulado e página de pedido confirmado.
