@@ -13,6 +13,122 @@ Trabalho do Marcelo Boer
 
 Também foram trabalhados pontos de experiência e acessibilidade: alto contraste, texto maior, redução de animações, navegação por teclado, e textos de privacidade com as opções de baixar e excluir os próprios dados (LGPD).
 
+## Prints
+
+### Loja
+
+Página inicial:
+
+![Página inicial da loja IWNZ Tech](docs/prints/loja-inicio.jpg)
+
+Catálogo com filtros por categoria e ordenação:
+
+![Catálogo de produtos da loja](docs/prints/loja-produtos.jpg)
+
+Carrinho, com o aviso de frete grátis:
+
+![Carrinho de compras com dois produtos](docs/prints/loja-carrinho.jpg)
+
+Pedido confirmado (checkout simulado):
+
+![Página de pedido confirmado](docs/prints/loja-pedido-confirmado.jpg)
+
+No celular:
+
+<img src="docs/prints/loja-celular.jpg" alt="Página inicial da loja no celular" width="320">
+
+### Painel da loja
+
+Visão geral com vendas da semana, meta do mês e ticket médio:
+
+![Dashboard do painel da loja](docs/prints/painel-dashboard.jpg)
+
+Lista de pedidos feitos na loja:
+
+![Lista de pedidos no painel](docs/prints/painel-pedidos.jpg)
+
+> Os nomes, e-mails e pedidos que aparecem nos prints são fictícios, criados só para a demonstração.
+
+## Diagrama do banco de dados
+
+O projeto não tem um servidor de banco de dados: tudo fica no `localStorage` do navegador, em listas no formato JSON. O diagrama abaixo mostra como esses dados se organizam e se relacionam, como seriam as tabelas de um banco.
+
+```mermaid
+erDiagram
+    PRODUTO {
+        string id PK
+        string nome
+        string sku
+        string categoria "Hardware, Periféricos, Monitores ou Acessórios"
+        number preco
+        number precoAntigo "opcional, mostra o desconto"
+        number estoque
+        boolean destaque
+        number nota
+        number avaliacoes
+        string imagem "URL"
+        string descricao
+    }
+    CLIENTE {
+        string id PK
+        string nome
+        string email UK
+        string telefone
+        string cpf
+        string cidade
+        string endereco
+        date criadoEm
+        string origem "loja ou painel"
+    }
+    CONTA_LOJA {
+        string email PK
+        string nome
+        string senhaHash "senha codificada (demonstração)"
+        date cadastradoEm
+        date consentimentoLGPD
+    }
+    PEDIDO {
+        string id PK "ex.: IWNZ-MWPJ..."
+        string clienteEmail FK
+        string clienteNome
+        number total
+        date data
+        string status "pago, pendente ou cancelado"
+    }
+    ITEM_PEDIDO {
+        string pedidoId FK
+        string produtoId FK
+        string nome
+        number preco "preço na hora da compra"
+        number quantidade
+    }
+    NEWSLETTER {
+        string email PK
+        date inscritoEm
+    }
+
+    CONTA_LOJA |o--|| CLIENTE : "cria ao se cadastrar"
+    CLIENTE ||--o{ PEDIDO : "faz"
+    PEDIDO ||--|{ ITEM_PEDIDO : "contém"
+    PRODUTO ||--o{ ITEM_PEDIDO : "aparece em"
+```
+
+Onde cada parte fica guardada:
+
+| Tabela | Chave no `localStorage` | Quem grava |
+|---|---|---|
+| `PRODUTO` | `loja:v2:produtos` | Painel (cadastro e edição) e Loja (baixa do estoque na compra) |
+| `CLIENTE` | `loja:v2:clientes` | Loja (ao criar conta) e Painel (cadastro manual) |
+| `PEDIDO` e `ITEM_PEDIDO` | `loja:v2:pedidos` (os itens ficam dentro de cada pedido) | Loja, ao finalizar a compra |
+| `CONTA_LOJA` | `iwnz_users` | Loja (cadastro e login) |
+| `NEWSLETTER` | `iwnz_newsletter` | Loja (formulário de newsletter) |
+
+Observações:
+
+- O e-mail liga a conta da loja ao cliente e o cliente aos pedidos.
+- O pedido guarda o nome e o preço de cada item no momento da compra. Assim, editar ou excluir o produto depois não muda pedidos antigos.
+- Quando alguém exclui a própria conta (LGPD), o cliente é removido e os pedidos dele ficam anônimos ("Cliente removido"). Os valores continuam contando nos relatórios do painel.
+
 ## Tecnologias
 
 HTML, CSS e JavaScript puros, sem frameworks e sem servidor. Todos os dados ficam guardados no próprio navegador (`localStorage` e `sessionStorage`).

@@ -12,6 +12,7 @@ Two apps that share data through browser storage:
 - `Dashboard/` — admin panel ("Minha Loja") for registering/listing products and clients and viewing store orders.
 - `Compartilhado/dados.js` — storage keys, initial catalog and helpers shared by both apps.
 - `Compartilhado/favicon.svg` — tab icon (the "I" brand mark, purple→blue gradient matching `--accent`/`--accent-2`), linked via `<link rel="icon" href="../Compartilhado/favicon.svg">` in all three pages; any new page should link it too.
+- `docs/prints/` — screenshots (JPEG) embedded in `README.md`, which also holds a Mermaid ER diagram of the localStorage data; update both when the UI or the data shape changes.
 
 ## Running
 
