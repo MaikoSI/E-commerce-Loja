@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minha Loja · Painel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="login" id="login" hidden>
+  <form class="glass loginbox" id="formLogin" novalidate>
+    <h1>Minha Loja</h1>
+    <p class="sub">Entre com sua conta de administrador</p>
+    <label>E-mail<input id="l-email" type="email" autocomplete="username" required></label>
+    <label>Senha<input id="l-senha" type="password" autocomplete="current-password" required></label>
+    <p class="erro" id="l-erro" role="alert" hidden></p>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+</div>
+<div class="shell" id="app" hidden>
+  <nav class="dock glass" aria-label="Menu principal">
+    <button data-go="dashboard" aria-label="Dashboard"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg><span>Dashboard</span></button>
+    <button data-go="cadastrar" aria-label="Cadastrar"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg><span>Cadastrar</span></button>
+    <button data-go="listar" aria-label="Listar"><svg class="i" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><span>Listar</span></button>
+  </nav>
+
+  <main class="panel glass">
+    <header>
+      <h1 id="title">Minha Loja</h1>
+      <div class="me">
+        <a class="btn ghost small" href="../Loja/" target="_blank" rel="noopener">Ver loja ↗</a><span class="menome" id="meNome"></span><div class="avatar" aria-hidden="true">A</div><button class="btn ghost small" id="sair" type="button">Sair</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section id="v-dashboard" class="grid">
+      <div class="card act">
+        <div class="cardhead"><h2>Vendas</h2><span class="sel">Semanal</span></div>
+        <div class="bars" id="bars"></div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div class="card over">
+        <div class="cardhead"><h2>Visão geral</h2><span class="sel">Mensal</span></div>
+        <div class="donutwrap">
+          <div class="donut">
+            <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="14"/><circle id="arcA" cx="60" cy="60" r="48" fill="none" stroke="#a78bfa" stroke-width="14" stroke-linecap="round"/><circle id="arcB" cx="60" cy="60" r="48" fill="none" stroke="#f2c500" stroke-width="14" stroke-linecap="round"/></svg>
+            <div class="c"><b id="goalPct">0%</b><small id="goalVal"></small></div>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+      </div>
+      <div class="card chal"><div class="cardhead"><h2>Metas da loja</h2></div><div id="goals"></div></div>
+      <div class="card cal">
+        <div class="calhead"><h2 id="calTitle"></h2><div style="display:flex;gap:8px"><button class="iconbtn" id="prevW" aria-label="Semana anterior">‹</button><button class="iconbtn" id="nextW" aria-label="Próxima semana">›</button></div></div>
+        <div class="days" id="days"></div>
+      </div>
+      <div class="card out">
+        <div class="cardhead"><h2>Resultado</h2><span class="sel">Mensal</span></div>
+        <div class="outrow"><div class="ic"><svg class="i" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg></div><div><b id="ticket"></b><small>Ticket médio</small></div><span class="pill" id="ticketSelo" hidden></span></div>
+      </div>
+    </section>
+
+    <!-- CADASTRAR -->
+    <section id="v-cadastrar" hidden>
+      <div class="tabs" role="tablist" aria-label="Tipo de cadastro"><button type="button" role="tab" data-aba="produtos" aria-controls="form">Produtos</button><button type="button" role="tab" data-aba="clientes" aria-controls="formCliente">Clientes</button></div>
+      <form id="form" class="card" role="tabpanel" aria-labelledby="formTitle" novalidate>
+        <div class="cardhead"><h2 id="formTitle">Novo produto</h2></div>
+        <input type="hidden" id="f-id">
+        <div class="formgrid">
+          <label class="full">Nome do produto<input id="f-nome" required placeholder="Ex.: Mouse Gamer sem fio"></label>
+          <label>SKU<input id="f-sku" placeholder="PER-MOU01"></label>
+          <label>Categoria<select id="f-cat"></select></label>
+          <label>Preço (R$)<input id="f-preco" type="number" min="0" step="0.01" required placeholder="0,00"></label>
+          <label>Preço antigo (R$) <small>opcional, mostra o desconto</small><input id="f-preco-antigo" type="number" min="0" step="0.01" placeholder="0,00"></label>
+          <label>Estoque (unidades)<input id="f-estoque" type="number" min="0" step="1" required placeholder="0"></label>
+          <label class="check"><input id="f-destaque" type="checkbox"> Destaque na loja (aparece primeiro)</label>
+          <label class="full">URL da imagem<input id="f-imagem" type="url" placeholder="https://… (deixe vazio para usar a imagem padrão)"></label>
+          <label class="full">Descrição<textarea id="f-desc" placeholder="Detalhes que o cliente vai ver na loja"></textarea></label>
+        </div>
+        <div class="actions"><button class="btn" type="submit">Salvar produto</button><button class="btn ghost" type="button" id="cancel">Limpar</button></div>
+      </form>
+      <form id="formCliente" class="card" role="tabpanel" aria-labelledby="formClienteTitle" novalidate hidden>
+        <div class="cardhead"><h2 id="formClienteTitle">Novo cliente</h2></div>
+        <input type="hidden" id="c-id">
+        <div class="formgrid">
+          <label class="full">Nome completo<input id="c-nome" required placeholder="Ex.: Maria da Silva" autocomplete="off"></label>
+          <label>E-mail<input id="c-email" type="email" required placeholder="maria@email.com" autocomplete="off" aria-describedby="c-email-dica"><small id="c-email-dica" hidden>É o login da conta na loja: não pode ser alterado aqui.</small></label>
+          <label>Telefone<input id="c-tel" type="tel" placeholder="(17) 99999-0000" autocomplete="off"></label>
+          <label>CPF<input id="c-cpf" placeholder="000.000.000-00" autocomplete="off"></label>
+          <label>Cidade<input id="c-cidade" placeholder="Fernandópolis" autocomplete="off"></label>
+          <label class="full">Endereço de entrega<input id="c-end" placeholder="Rua, número, bairro, CEP" autocomplete="off"></label>
+        </div>
+        <div class="actions"><button class="btn" type="submit">Salvar cliente</button><button class="btn ghost" type="button" id="cancelC">Limpar</button></div>
+      </form>
+    </section>
+
+    <!-- LISTAR -->
+    <section id="v-listar" hidden>
+      <div class="tabs" role="tablist" aria-label="Tipo de lista"><button type="button" role="tab" data-aba="produtos" aria-controls="card-produtos">Produtos</button><button type="button" role="tab" data-aba="clientes" aria-controls="card-clientes">Clientes</button><button type="button" role="tab" data-aba="pedidos" aria-controls="card-pedidos">Pedidos</button></div>
+      <div class="card" id="card-produtos" role="tabpanel" aria-label="Produtos">
+        <div class="tools"><input id="q" type="search" placeholder="Buscar por nome, SKU ou categoria" aria-label="Buscar produtos"></div>
+        <div class="tablewrap"><table><thead><tr><th>Produto</th><th>Categoria</th><th class="r">Preço</th><th class="r">Estoque</th><th class="r">Ações</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="empty" id="empty" hidden>Nenhum produto encontrado. Use Cadastrar para adicionar o primeiro.</div>
+      </div>
+      <div class="card" id="card-clientes" role="tabpanel" aria-label="Clientes" hidden>
+        <div class="tools"><input id="qc" type="search" placeholder="Buscar por nome, e-mail ou cidade" aria-label="Buscar clientes"></div>
+        <div class="tablewrap"><table><thead><tr><th>Cliente</th><th>Telefone</th><th>Cidade</th><th>Cadastro</th><th class="r">Ações</th></tr></thead><tbody id="rowsC"></tbody></table></div>
+        <div class="empty" id="emptyC" hidden>Nenhum cliente encontrado. Os clientes aparecem aqui quando criam conta na loja.</div>
+      </div>
+      <div class="card" id="card-pedidos" role="tabpanel" aria-label="Pedidos" hidden>
+        <div class="tools"><input id="qp" type="search" placeholder="Buscar por número, cliente ou produto" aria-label="Buscar pedidos"></div>
+        <div class="tablewrap"><table><thead><tr><th>Pedido</th><th>Cliente</th><th>Itens</th><th>Data</th><th class="r">Total</th></tr></thead><tbody id="rowsP"></tbody></table></div>
+        <div class="empty" id="emptyP" hidden>Nenhum pedido ainda. Os pedidos aparecem aqui quando um cliente finaliza a compra na loja.</div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="../Compartilhado/dados.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
