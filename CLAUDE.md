@@ -23,6 +23,8 @@ Serve over HTTP (the storefront loads `script.js` as `type="module"`, which fail
 python3 -m http.server 8000   # then open /Loja/ or /Dashboard/
 ```
 
+`IWNZ-Tech.code-workspace` is the VS Code multi-root workspace the owner uses: folders Loja / Dashboard / Compartilhado / project root (the root folder hides the other three via `files.exclude`), plus tasks "Rodar site local" (the server above) and "Abrir Loja / Dashboard / Loja e Dashboard / site publicado". `editor.formatOnSave` is off on purpose — don't reformat the compact Dashboard code. The README is public-facing (the owner removed local-run instructions from it); keep developer setup here, not there.
+
 Dashboard demo login: `admin@admin.com` / `adminadmin` (hard-coded in `Auth.DEMO`, `Dashboard/script.js`).
 
 ## Architecture
