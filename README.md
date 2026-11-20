@@ -148,17 +148,3 @@ Observações:
 
 HTML, CSS e JavaScript puros, sem frameworks e sem servidor. Todos os dados ficam guardados no próprio navegador (`localStorage` e `sessionStorage`).
 
-## Como rodar
-
-O site precisa ser aberto por um servidor local (abrir o arquivo direto no navegador não funciona):
-
-```bash
-python3 -m http.server 8000
-```
-
-Depois acesse:
-
-- Loja: http://localhost:8000/Loja/
-- Painel: http://localhost:8000/Dashboard/
-
-O login de demonstração do painel é fictício e está em `Dashboard/script.js` (objeto `Auth.DEMO`). Como a loja e o painel usam o mesmo armazenamento do navegador, os dois precisam ser abertos pelo mesmo endereço.
